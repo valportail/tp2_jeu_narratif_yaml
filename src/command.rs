@@ -3,10 +3,11 @@ use crate::GameState;
 use crate::ParseError;
 use crate::Scenario;
 
-#[derive(PartialEq)]
+#[derive(Debug, PartialEq)]
 pub enum CommandOutcome {
     Continue,
     Exit,
+    GameOver,
 }
 
 pub trait GameCommand {
@@ -40,7 +41,7 @@ pub fn parse_command(line: &str) -> Result<Box<dyn GameCommand>, ParseError> {
 pub struct LookCommand;
 
 pub struct ChooseCommand {
-    n: usize,
+    pub n: usize,
 }
 
 pub struct InventoryCommand;
@@ -101,7 +102,7 @@ impl GameCommand for ChooseCommand {
                 // Check ending condition
                 if state.hp <= 0 {
                     println!("Vous êtes mort.");
-                    Ok(CommandOutcome::Exit)
+                    Ok(CommandOutcome::GameOver)
                 } else if let Some(_ending) = &state.scene.ending {
                     Ok(CommandOutcome::Exit)
                 } else {

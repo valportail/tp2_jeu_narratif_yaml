@@ -1,3 +1,4 @@
+#[derive(Debug, PartialEq)]
 pub enum GameError {
     InvalidChoice,
     MissingItem(String),
@@ -5,6 +6,7 @@ pub enum GameError {
 
 pub struct ParseError;
 
+#[derive(Debug, PartialEq)]
 pub enum ScenarioError {
     NonExistingStartScene,
     NonUniqueSceneIds(String),

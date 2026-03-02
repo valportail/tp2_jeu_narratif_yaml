@@ -1,11 +1,11 @@
 use std::collections::HashMap;
 use std::collections::hash_map::Entry::{Occupied, Vacant};
 
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
 use crate::ScenarioError;
 
-#[derive(Clone, Debug, Deserialize)]
+#[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct Choice {
     pub label: String,
     pub next: String,
@@ -13,7 +13,7 @@ pub struct Choice {
     pub required_item: Option<String>,
 }
 
-#[derive(Clone, Debug, Deserialize)]
+#[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct Scene {
     pub id: String,
     pub title: String,
@@ -28,7 +28,7 @@ pub struct Scene {
     pub ending: Option<String>,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct Scenario {
     pub start_scene: String,
     pub initial_hp: i8,
